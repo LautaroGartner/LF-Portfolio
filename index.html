@@ -540,6 +540,67 @@
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
  
+  /* ─── CTA BLOCK ─── */
+  .cta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+    justify-content: center;
+  }
+  .cta-big {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 1.4rem 2rem;
+    border-radius: 20px;
+    width: 100%;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.3);
+  }
+  .cta-big:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(37,211,102,0.4);
+  }
+  .cta-big-icon { font-size: 2rem; flex-shrink: 0; }
+  .cta-big-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+  }
+  .cta-big-text em {
+    font-style: normal;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .cta-big-text small {
+    font-size: 0.8rem;
+    opacity: 0.85;
+    letter-spacing: 0.05em;
+  }
+  .cta-big-arrow {
+    font-size: 1.4rem;
+    opacity: 0.8;
+    flex-shrink: 0;
+  }
+  .cta-secondary {
+    font-size: 0.82rem;
+    color: var(--gray);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--pink-mid);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    align-self: center;
+  }
+  .cta-secondary:hover { color: var(--pink-deep); border-color: var(--pink-deep); }
+ 
   /* ─── HAMBURGER ─── */
   .hamburger {
     display: none;
@@ -948,23 +1009,19 @@
       </a>
     </div>
   </div>
-  <form class="contact-form reveal" id="contactForm">
-    <div class="form-group">
-      <label for="nombre">Tu nombre</label>
-      <input type="text" id="nombre" name="nombre" placeholder="María García" required>
-    </div>
-    <div class="form-group">
-      <label for="contacto_info">Email o WhatsApp</label>
-      <input type="text" id="contacto_info" name="contacto" placeholder="maria@email.com" required>
-    </div>
-    <div class="form-group">
-      <label for="mensaje">¿En qué te puedo ayudar?</label>
-      <textarea id="mensaje" name="mensaje" rows="4" placeholder="Contame sobre tu marca y lo que buscás..." required></textarea>
-    </div>
-    <button type="submit" class="form-submit" id="submitBtn">Enviar mensaje →</button>
-    <p id="formSuccess" style="display:none;color:var(--pink-deep);font-size:0.85rem;margin-top:0.5rem;">✅ ¡WhatsApp abierto! Revisá que se haya enviado el mensaje.</p>
- 
-  </form>
+  <div class="cta-block reveal">
+    <a href="https://wa.me/5493445431267?text=Hola%20Lucía%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20trabajar%20juntos%20🌸" target="_blank" class="cta-big">
+      <span class="cta-big-icon">💬</span>
+      <span class="cta-big-text">
+        <em>Escribime por WhatsApp</em>
+        <small>Te respondo rápido 🌸</small>
+      </span>
+      <span class="cta-big-arrow">→</span>
+    </a>
+    <a href="mailto:lucia.frick12@gmail.com?subject=Consulta%20desde%20tu%20portfolio%20🌸" class="cta-secondary">
+      O si preferís, mandame un mail
+    </a>
+  </div>
 </section>
  
 <!-- FOOTER -->
@@ -978,20 +1035,7 @@
 </footer>
  
 <script>
-  // Form → WhatsApp
-  const form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const nombre   = document.getElementById('nombre').value.trim();
-      const contacto = document.getElementById('contacto_info').value.trim();
-      const mensaje  = document.getElementById('mensaje').value.trim();
-      const text = `Hola Lucía! Te escribo desde tu portfolio 🌸\n\n*Nombre:* ${nombre}\n*Contacto:* ${contacto}\n*Consulta:* ${mensaje}`;
-      window.location.href = 'https://wa.me/5493445431267?text=' + encodeURIComponent(text);
-      document.getElementById('formSuccess').style.display = 'block';
-      form.reset();
-    });
-  }
+ 
  
  
   const reveals = document.querySelectorAll('.reveal');
