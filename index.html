@@ -15,18 +15,18 @@
     --dark: #1a1a1a;
     --gray: #888;
   }
-
+ 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   html { scroll-behavior: smooth; }
-
+ 
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--white);
     color: var(--dark);
     overflow-x: hidden;
   }
-
+ 
   /* ─── NAV ─── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -54,7 +54,7 @@
     transition: color 0.2s;
   }
   nav a:hover { color: var(--pink-deep); }
-
+ 
   /* ─── HERO ─── */
   .hero {
     min-height: 100vh;
@@ -123,7 +123,7 @@
     animation: fadeUp 0.8s 0.8s forwards;
   }
   .hero-cta:hover { background: #c45a78; transform: translateY(-2px); }
-
+ 
   .hero-right {
     position: relative;
     background: var(--pink-light);
@@ -166,7 +166,7 @@
     text-transform: uppercase;
   }
   .hero-photo-placeholder svg { opacity: 0.5; }
-
+ 
   /* ─── ABOUT ─── */
   .about {
     background: var(--pink);
@@ -199,7 +199,7 @@
     margin-bottom: 1.2rem;
   }
   .about-text p:last-child { margin-bottom: 0; }
-
+ 
   /* ─── WORK ─── */
   .work { padding: 7rem 5rem; }
   .section-header { text-align: center; margin-bottom: 4rem; }
@@ -221,13 +221,13 @@
     font-style: italic;
     color: var(--pink);
   }
-
+ 
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
-
+ 
   .project-card {
     border-radius: 16px;
     overflow: hidden;
@@ -237,7 +237,7 @@
   }
   .project-card:hover { transform: translateY(-6px); }
   .project-card:hover .project-overlay { opacity: 1; }
-
+ 
   .project-visual {
     width: 100%;
     aspect-ratio: 4/3;
@@ -251,7 +251,7 @@
     letter-spacing: 0.05em;
     position: relative;
   }
-
+ 
   .project-visual.contadora {
     background: linear-gradient(135deg, #7B5EA7, #5A3D8A);
   }
@@ -265,13 +265,13 @@
   .project-visual.muebleria {
     background: linear-gradient(135deg, #C17A3A, #8B5520);
   }
-
+ 
   .project-icon {
     font-size: 3rem;
     margin-bottom: 0.5rem;
     opacity: 0.85;
   }
-
+ 
   .project-overlay {
     position: absolute;
     inset: 0;
@@ -291,7 +291,7 @@
     padding: 0.6rem 1.4rem;
     border-radius: 50px;
   }
-
+ 
   .project-info { padding: 1.4rem 0 0.5rem; }
   .project-tag {
     font-size: 0.68rem;
@@ -328,7 +328,7 @@
     color: var(--pink-deep);
     border: 1px solid var(--pink-mid);
   }
-
+ 
   /* ─── SERVICES ─── */
   .services {
     background: var(--pink-light);
@@ -384,7 +384,7 @@
     margin-top: 0.5em;
     flex-shrink: 0;
   }
-
+ 
   /* ─── MARQUEE ─── */
   .marquee-wrap {
     overflow: hidden;
@@ -410,7 +410,7 @@
     font-style: normal;
   }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
+ 
   /* ─── CONTACT ─── */
   .contact {
     padding: 7rem 5rem;
@@ -459,7 +459,7 @@
   .contact-link:hover .contact-link-icon { background: var(--pink-mid); }
   .contact-link-text { font-size: 0.9rem; }
   .contact-link-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pink-deep); }
-
+ 
   .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
   .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
   .form-group label {
@@ -498,7 +498,7 @@
     align-self: flex-start;
   }
   .form-submit:hover { background: #c45a78; transform: translateY(-2px); }
-
+ 
   /* ─── FOOTER ─── */
   footer {
     background: var(--dark);
@@ -526,24 +526,144 @@
     transition: border-color 0.2s, color 0.2s;
   }
   .footer-social a:hover { border-color: var(--pink); color: var(--pink); }
-
+ 
   /* ─── ANIMATIONS ─── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
+ 
   .reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-
+ 
+  /* ─── HAMBURGER ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px; height: 36px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--dark);
+    transition: transform 0.35s cubic-bezier(.77,0,.18,1), opacity 0.2s, width 0.3s;
+    transform-origin: center;
+  }
+  .hamburger span:nth-child(1) { width: 100%; }
+  .hamburger span:nth-child(2) { width: 65%; }
+  .hamburger span:nth-child(3) { width: 85%; }
+ 
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 100%; }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 100%; }
+ 
+  /* Mobile overlay menu */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    pointer-events: none;
+  }
+  .mobile-menu-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,26,26,0.45);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .mobile-menu-panel {
+    position: absolute;
+    top: 0; right: 0;
+    width: min(80vw, 320px);
+    height: 100%;
+    background: var(--white);
+    border-left: 1px solid var(--pink-mid);
+    display: flex;
+    flex-direction: column;
+    padding: 6rem 2.5rem 3rem;
+    gap: 0;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+  }
+  .mobile-menu.open {
+    pointer-events: all;
+  }
+  .mobile-menu.open .mobile-menu-backdrop { opacity: 1; }
+  .mobile-menu.open .mobile-menu-panel { transform: translateX(0); }
+ 
+  .mobile-menu-panel a {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark);
+    text-decoration: none;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--pink-mid);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: color 0.2s, opacity 0.35s ease, transform 0.35s ease;
+  }
+  .mobile-menu-panel a em {
+    font-style: italic;
+    color: var(--pink);
+    font-size: 0.6em;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+  }
+  .mobile-menu.open .mobile-menu-panel a { opacity: 1; transform: translateX(0); }
+  .mobile-menu.open .mobile-menu-panel a:nth-child(1) { transition-delay: 0.1s; }
+  .mobile-menu.open .mobile-menu-panel a:nth-child(2) { transition-delay: 0.17s; }
+  .mobile-menu.open .mobile-menu-panel a:nth-child(3) { transition-delay: 0.24s; }
+  .mobile-menu.open .mobile-menu-panel a:nth-child(4) { transition-delay: 0.31s; }
+  .mobile-menu-panel a:hover { color: var(--pink-deep); }
+ 
+  .mobile-menu-socials {
+    margin-top: auto;
+    display: flex;
+    gap: 1rem;
+    padding-top: 2rem;
+    opacity: 0;
+    transition: opacity 0.35s 0.4s ease;
+  }
+  .mobile-menu.open .mobile-menu-socials { opacity: 1; }
+  .mobile-menu-socials a {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid var(--pink-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    text-decoration: none;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: background 0.2s, border-color 0.2s !important;
+    padding: 0;
+    border-bottom: 1.5px solid var(--pink-mid) !important;
+  }
+  .mobile-menu-socials a:hover { background: var(--pink-light); border-color: var(--pink-deep) !important; }
+ 
   /* ─── MOBILE ─── */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
-    nav ul { display: none; }
+    nav > ul { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: block; }
     .hero { grid-template-columns: 1fr; }
     .hero-left { padding: 6rem 2rem 3rem; }
     .hero-right { display: none; }
@@ -557,7 +677,7 @@
 </style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Lucía <span>Frick</span></div>
@@ -567,8 +687,26 @@
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-
+ 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-backdrop" id="menuBackdrop"></div>
+  <div class="mobile-menu-panel">
+    <a href="#sobre-mi" class="menu-link">Sobre mí <em>✦</em></a>
+    <a href="#trabajos" class="menu-link">Trabajos <em>✦</em></a>
+    <a href="#servicios" class="menu-link">Servicios <em>✦</em></a>
+    <a href="#contacto" class="menu-link">Contacto <em>✦</em></a>
+    <div class="mobile-menu-socials">
+      <a href="https://instagram.com/luciafrick_" target="_blank" title="Instagram">📸</a>
+      <a href="https://wa.me/5493445431267?text=Hola%20Lucía%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20trabajar%20juntos%20🌸" target="_blank" title="WhatsApp">💬</a>
+    </div>
+  </div>
+</div>
+ 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
@@ -587,7 +725,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
@@ -607,7 +745,7 @@
     <span class="marquee-item">Identidad de Marca <span class="marquee-dot">✦</span></span>
   </div>
 </div>
-
+ 
 <!-- ABOUT -->
 <section class="about" id="sobre-mi">
   <div class="about-label reveal">
@@ -620,7 +758,7 @@
     <p>Ya trabajé con marcas de diferentes rubros y me adapto rápido a cada tono, producto o necesidad. Me gusta que lo que creo tenga propósito, estética y coherencia.</p>
   </div>
 </section>
-
+ 
 <!-- WORK -->
 <section class="work" id="trabajos">
   <div class="section-header reveal">
@@ -628,7 +766,7 @@
     <h2 class="section-title">Vitrina <em>Digital</em></h2>
   </div>
   <div class="projects-grid">
-
+ 
     <div class="project-card reveal">
       <div class="project-visual contadora">
         <div style="text-align:center">
@@ -649,7 +787,7 @@
         </div>
       </div>
     </div>
-
+ 
     <div class="project-card reveal">
       <div class="project-visual restobar">
         <div style="text-align:center">
@@ -670,7 +808,7 @@
         </div>
       </div>
     </div>
-
+ 
     <div class="project-card reveal">
       <div class="project-visual tienda">
         <div style="text-align:center">
@@ -691,7 +829,7 @@
         </div>
       </div>
     </div>
-
+ 
     <div class="project-card reveal">
       <div class="project-visual muebleria">
         <div style="text-align:center">
@@ -711,10 +849,10 @@
         </div>
       </div>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <!-- SERVICES -->
 <section class="services" id="servicios">
   <div class="section-header reveal">
@@ -723,7 +861,7 @@
   </div>
   <p style="text-align:center;color:#777;font-size:0.95rem;margin-top:-2rem;max-width:600px;margin-left:auto;margin-right:auto;" class="reveal">Cada proyecto necesita algo distinto: estrategia, diseño, contenido o todo junto. Acá te muestro todo lo que sé hacer para que tu marca brille.</p>
   <div class="services-grid">
-
+ 
     <div class="service-card reveal">
       <div class="service-number">01</div>
       <h3 class="service-title">Estrategia + Marca</h3>
@@ -736,7 +874,7 @@
         <li>Escritura de copys estratégicos con método AIDA y CTA</li>
       </ul>
     </div>
-
+ 
     <div class="service-card reveal">
       <div class="service-number">02</div>
       <h3 class="service-title">Contenido + Redes Sociales</h3>
@@ -749,7 +887,7 @@
         <li>Calendario de contenido personalizado</li>
       </ul>
     </div>
-
+ 
     <div class="service-card reveal">
       <div class="service-number">03</div>
       <h3 class="service-title">Gestión + Resultados</h3>
@@ -761,10 +899,10 @@
         <li>Acompañamiento integral para crecer la presencia digital</li>
       </ul>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <!-- MARQUEE 2 -->
 <div class="marquee-wrap" style="background: var(--pink-deep);">
   <div class="marquee-track" style="animation-direction: reverse;">
@@ -780,18 +918,18 @@
     <span class="marquee-item" style="color:white;">Diseño Editorial <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
   </div>
 </div>
-
+ 
 <!-- CONTACT -->
 <section class="contact" id="contacto">
   <div class="contact-left reveal">
     <h2>¿Trabajamos <em>juntos?</em></h2>
     <p>Si tu marca necesita orden, estética y una estrategia que funcione de verdad, escribime. Me involucro con cada proyecto como si fuera mío.</p>
     <div class="contact-links">
-      <a href="mailto:lucia@email.com" class="contact-link">
+      <a href="/cdn-cgi/l/email-protection#84e8f1e7ede5c4e1e9e5ede8aae7ebe9" class="contact-link">
         <div class="contact-link-icon">✉️</div>
         <div>
           <div class="contact-link-label">Email</div>
-          <div class="contact-link-text">lucia.frick12@gmail.com</div>
+          <div class="contact-link-text"><span class="__cf_email__" data-cfemail="69051c0a0008470f1b000a02585b290e04080005470a0604">[email&#160;protected]</span></div>
         </div>
       </a>
       <a href="https://instagram.com/luciafrick_" target="_blank" class="contact-link">
@@ -801,7 +939,7 @@
           <div class="contact-link-text">@luciafrick_</div>
         </div>
       </a>
-      <a href="https://wa.me/+5493445431267" target="_blank" class="contact-link">
+      <a href="https://wa.me/5493445431267?text=Hola%20Lucía%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20trabajar%20juntos%20🌸" target="_blank" class="contact-link">
         <div class="contact-link-icon">💬</div>
         <div>
           <div class="contact-link-label">WhatsApp</div>
@@ -810,36 +948,70 @@
       </a>
     </div>
   </div>
-  <div class="contact-form reveal">
+  <form class="contact-form reveal" action="https://formspree.io/f/xlgobodl" method="POST" id="contactForm">
     <div class="form-group">
-      <label>Tu nombre</label>
-      <input type="text" placeholder="María García">
+      <label for="nombre">Tu nombre</label>
+      <input type="text" id="nombre" name="nombre" placeholder="María García" required>
     </div>
     <div class="form-group">
-      <label>Email o WhatsApp</label>
-      <input type="text" placeholder="maria@email.com">
+      <label for="contacto_info">Email o WhatsApp</label>
+      <input type="text" id="contacto_info" name="contacto" placeholder="maria@email.com" required>
     </div>
     <div class="form-group">
-      <label>¿En qué te puedo ayudar?</label>
-      <textarea rows="4" placeholder="Contame sobre tu marca y lo que buscás..."></textarea>
+      <label for="mensaje">¿En qué te puedo ayudar?</label>
+      <textarea id="mensaje" name="mensaje" rows="4" placeholder="Contame sobre tu marca y lo que buscás..." required></textarea>
     </div>
-    <button class="form-submit">Enviar mensaje →</button>
-  </div>
+    <button type="submit" class="form-submit" id="submitBtn">Enviar mensaje →</button>
+    <p id="formSuccess" style="display:none;color:var(--pink-deep);font-size:0.85rem;margin-top:0.5rem;">✅ ¡Mensaje enviado! Te respondo a la brevedad.</p>
+    <p id="formError" style="display:none;color:#c0392b;font-size:0.85rem;margin-top:0.5rem;">❌ Algo salió mal. Intentá de nuevo o escribime directo por WhatsApp.</p>
+  </form>
 </section>
-
+ 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Lucía <span>Frick</span></div>
   <p class="footer-copy">© 2026 Lucía Frick — Social Media Manager & Brand Creator</p>
   <div class="footer-social">
-    <a href="#" title="Instagram">📸</a>
-    <a href="#" title="WhatsApp">💬</a>
-    <a href="#" title="LinkedIn">💼</a>
+    <a href="https://instagram.com/luciafrick_" target="_blank" title="Instagram">📸</a>
+    <a href="https://wa.me/5493445431267?text=Hola%20Lucía%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20trabajar%20juntos%20🌸" target="_blank" title="WhatsApp">💬</a>
   </div>
 </footer>
-
-<script>
-  // Scroll reveal
+ 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Form submission via Formspree
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const success = document.getElementById('formSuccess');
+      const error = document.getElementById('formError');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.reset();
+          success.style.display = 'block';
+          error.style.display = 'none';
+          btn.textContent = '¡Enviado! ✓';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        error.style.display = 'block';
+        success.style.display = 'none';
+        btn.textContent = 'Enviar mensaje →';
+        btn.disabled = false;
+      }
+    });
+  }
+ 
+ 
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -850,10 +1022,34 @@
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
-
+ 
   // Stagger grid children
   document.querySelectorAll('.projects-grid .project-card, .services-grid .service-card').forEach((el, i) => {
     el.style.transitionDelay = `${(i % 2) * 120}ms`;
+  });
+ 
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuBackdrop = document.getElementById('menuBackdrop');
+ 
+  function openMenu() {
+    hamburger.classList.add('open');
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+ 
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  menuBackdrop.addEventListener('click', closeMenu);
+  document.querySelectorAll('.menu-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
 </script>
 </body>
