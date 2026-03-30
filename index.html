@@ -977,37 +977,19 @@
   </div>
 </footer>
  
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Form submission via Formspree
+<script>
+  // Form → WhatsApp
   const form = document.getElementById('contactForm');
   if (form) {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      const success = document.getElementById('formSuccess');
-      const error = document.getElementById('formError');
-      btn.textContent = 'Enviando...';
-      btn.disabled = true;
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          form.reset();
-          success.style.display = 'block';
-          error.style.display = 'none';
-          btn.textContent = '¡Enviado! ✓';
-        } else {
-          throw new Error();
-        }
-      } catch {
-        error.style.display = 'block';
-        success.style.display = 'none';
-        btn.textContent = 'Enviar mensaje →';
-        btn.disabled = false;
-      }
+      const nombre   = document.getElementById('nombre').value.trim();
+      const contacto = document.getElementById('contacto_info').value.trim();
+      const mensaje  = document.getElementById('mensaje').value.trim();
+      const text = `Hola Lucía! Te escribo desde tu portfolio 🌸\n\n*Nombre:* ${nombre}\n*Contacto:* ${contacto}\n*Consulta:* ${mensaje}`;
+      window.location.href = 'https://wa.me/5493445431267?text=' + encodeURIComponent(text);
+      document.getElementById('formSuccess').style.display = 'block';
+      form.reset();
     });
   }
  
