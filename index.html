@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucía Frick — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #F2A4B8;
+    --pink-light: #FAE8EE;
+    --pink-mid: #F5C4D0;
+    --pink-deep: #E07090;
+    --white: #FFFAF9;
+    --dark: #1a1a1a;
+    --gray: #888;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(255,250,249,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--pink-mid);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--dark);
+  }
+  .nav-logo span { color: var(--pink-deep); font-style: italic; }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav a {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dark);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--pink-deep); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 70px;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 5rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--pink);
+    margin-bottom: 0.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+  .hero-title-script {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--dark);
+    line-height: 1.1;
+    display: block;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555;
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    background: var(--pink-deep);
+    color: white;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: background 0.2s, transform 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .hero-cta:hover { background: #c45a78; transform: translateY(-2px); }
+
+  .hero-right {
+    position: relative;
+    background: var(--pink-light);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .hero-right::before {
+    content: 'PORTFOLIO';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 10vw, 11rem);
+    font-weight: 900;
+    color: var(--pink-mid);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .hero-photo-placeholder {
+    position: relative;
+    z-index: 2;
+    width: 75%;
+    max-width: 380px;
+    aspect-ratio: 3/4;
+    background: linear-gradient(160deg, #e8c8d4, #d4a0b4);
+    border-radius: 200px 200px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .hero-photo-placeholder svg { opacity: 0.5; }
+
+  /* ─── ABOUT ─── */
+  .about {
+    background: var(--pink);
+    padding: 6rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-label {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900;
+    color: white;
+    line-height: 0.9;
+  }
+  .about-label em {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.45em;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    margin-top: 0.3em;
+  }
+  .about-text p {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 1.2rem;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  /* ─── WORK ─── */
+  .work { padding: 7rem 5rem; }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .section-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--pink);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .project-card {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .project-card:hover { transform: translateY(-6px); }
+  .project-card:hover .project-overlay { opacity: 1; }
+
+  .project-visual {
+    width: 100%;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.05em;
+    position: relative;
+  }
+
+  .project-visual.contadora {
+    background: linear-gradient(135deg, #7B5EA7, #5A3D8A);
+  }
+  .project-visual.restobar {
+    background: linear-gradient(135deg, #1a1a1a, #3d1520);
+  }
+  .project-visual.tienda {
+    background: linear-gradient(135deg, #F5C842, #D4A800);
+    color: #1a1a1a;
+  }
+  .project-visual.muebleria {
+    background: linear-gradient(135deg, #C17A3A, #8B5520);
+  }
+
+  .project-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.85;
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-overlay span {
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+  }
+
+  .project-info { padding: 1.4rem 0 0.5rem; }
+  .project-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+    margin-bottom: 0.3rem;
+  }
+  .project-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+  }
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+  .project-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.8rem;
+  }
+  .pill {
+    font-size: 0.67rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.8rem;
+    border-radius: 50px;
+    background: var(--pink-light);
+    color: var(--pink-deep);
+    border: 1px solid var(--pink-mid);
+  }
+
+  /* ─── SERVICES ─── */
+  .services {
+    background: var(--pink-light);
+    padding: 7rem 5rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+  .service-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--pink-mid);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(242,164,184,0.25);
+  }
+  .service-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--pink-mid);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1.2rem;
+  }
+  .service-list { list-style: none; }
+  .service-list li {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.6;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--pink-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .service-list li::before {
+    content: '◆';
+    color: var(--pink);
+    font-size: 0.45rem;
+    margin-top: 0.5em;
+    flex-shrink: 0;
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    overflow: hidden;
+    background: var(--dark);
+    padding: 1.1rem 0;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex;
+    animation: marquee 18s linear infinite;
+  }
+  .marquee-item {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--pink);
+    padding: 0 2.5rem;
+    letter-spacing: 0.05em;
+  }
+  .marquee-dot {
+    color: var(--pink-deep);
+    font-style: normal;
+  }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ─── CONTACT ─── */
+  .contact {
+    padding: 7rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .contact-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+  .contact-left h2 em {
+    font-style: italic;
+    color: var(--pink);
+  }
+  .contact-left p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--dark);
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--pink-deep); }
+  .contact-link-icon {
+    width: 44px; height: 44px;
+    background: var(--pink-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .contact-link:hover .contact-link-icon { background: var(--pink-mid); }
+  .contact-link-text { font-size: 0.9rem; }
+  .contact-link-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pink-deep); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .form-group input,
+  .form-group textarea {
+    padding: 0.9rem 1.2rem;
+    border: 1.5px solid var(--pink-mid);
+    border-radius: 10px;
+    background: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--pink-deep); }
+  .form-submit {
+    padding: 1rem 2.5rem;
+    background: var(--pink-deep);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    align-self: flex-start;
+  }
+  .form-submit:hover { background: #c45a78; transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    padding: 2.5rem 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: white;
+  }
+  .footer-logo span { color: var(--pink); font-style: italic; }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+  .footer-social { display: flex; gap: 1rem; }
+  .footer-social a {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .footer-social a:hover { border-color: var(--pink); color: var(--pink); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 6rem 2rem 3rem; }
+    .hero-right { display: none; }
+    .about, .work, .services, .contact { padding: 5rem 2rem; }
+    .about { grid-template-columns: 1fr; gap: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .contact { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Lucía <span>Frick</span></div>
+  <ul>
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Social Media Manager & Brand Creator</p>
+    <h1 class="hero-title">Lucía Frick</h1>
+    <span class="hero-title-script">Portfolio</span>
+    <p class="hero-desc">Transformo tus ideas en comunicación clara, estética y coherente. Trabajo con marcas desde la raíz para que tu presencia digital conecte de verdad.</p>
+    <a href="#trabajos" class="hero-cta">Ver mis trabajos</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-placeholder">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+      <span>Tu foto aquí</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Branding <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Social Media <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Diseño de Contenido <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Estrategia Digital <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Reels & Stories <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Meta Ads <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Identidad de Marca <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Branding <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Social Media <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Diseño de Contenido <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Estrategia Digital <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Reels & Stories <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Meta Ads <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Identidad de Marca <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="sobre-mi">
+  <div class="about-label reveal">
+    SOBRE<br>MÍ
+    <em>¿Quién soy?</em>
+  </div>
+  <div class="about-text reveal">
+    <p>Soy Lucía Frick, Social Media Manager, publicista en redes, creadora de contenido y diseñadora. Trabajo con marcas desde la raíz: analizo su identidad, creo estrategias de comunicación, diseño piezas visuales y genero contenido que conecta de verdad con las personas.</p>
+    <p>Me especializo en darle vida a cuentas que necesitan orden, creatividad y dirección. Me involucro en cada proyecto con compromiso, intuición y detalle, porque creo que cuando el trabajo está bien hecho, se nota.</p>
+    <p>Ya trabajé con marcas de diferentes rubros y me adapto rápido a cada tono, producto o necesidad. Me gusta que lo que creo tenga propósito, estética y coherencia.</p>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="trabajos">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Casos reales</p>
+    <h2 class="section-title">Vitrina <em>Digital</em></h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-visual contadora">
+        <div style="text-align:center">
+          <div class="project-icon">💜</div>
+          <div>CONTADORA</div>
+        </div>
+        <div class="project-overlay"><span>Ver proyecto</span></div>
+      </div>
+      <div class="project-info">
+        <p class="project-tag">Finanzas · Instagram</p>
+        <h3 class="project-name">Contadora Pública — MF</h3>
+        <p class="project-desc">Branding completo, estrategia de contenido educativo y diseño de posts sobre normativa fiscal. Paleta violeta con tipografías elegantes.</p>
+        <div class="project-pills">
+          <span class="pill">Branding</span>
+          <span class="pill">Posts IG</span>
+          <span class="pill">Estrategia</span>
+          <span class="pill">Copywriting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-visual restobar">
+        <div style="text-align:center">
+          <div class="project-icon">🍕</div>
+          <div>RESTOBAR</div>
+        </div>
+        <div class="project-overlay"><span>Ver proyecto</span></div>
+      </div>
+      <div class="project-info">
+        <p class="project-tag">Gastronomía · Instagram</p>
+        <h3 class="project-name">Andalé Crespo — Restobar</h3>
+        <p class="project-desc">Perfil de Instagram estético y organizado. Diseño de historias, creación y edición de Reels, elementos gráficos personalizados.</p>
+        <div class="project-pills">
+          <span class="pill">Perfil IG</span>
+          <span class="pill">Reels</span>
+          <span class="pill">Historias</span>
+          <span class="pill">Gráfica</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-visual tienda">
+        <div style="text-align:center">
+          <div class="project-icon" style="font-size:2.5rem">🍍</div>
+          <div>PIÑA Y MAMBO</div>
+        </div>
+        <div class="project-overlay"><span>Ver proyecto</span></div>
+      </div>
+      <div class="project-info">
+        <p class="project-tag">Moda Teen · Branding</p>
+        <h3 class="project-name">Piña y Mambo Teens</h3>
+        <p class="project-desc">Branding de marca completo: paleta amarillo-negro, tipografías, estilo de imágenes, diseño de historias y portadas de Reels para tienda de ropa juvenil.</p>
+        <div class="project-pills">
+          <span class="pill">Branding</span>
+          <span class="pill">Historias</span>
+          <span class="pill">Portadas</span>
+          <span class="pill">Identidad</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-visual muebleria">
+        <div style="text-align:center">
+          <div class="project-icon">🪵</div>
+          <div>AR AMOBLAMIENTOS</div>
+        </div>
+        <div class="project-overlay"><span>Ver proyecto</span></div>
+      </div>
+      <div class="project-info">
+        <p class="project-tag">Mueblería · Rebranding</p>
+        <h3 class="project-name">AR Amoblamientos — Rebranding</h3>
+        <p class="project-desc">Transformación estética completa del perfil. De una estética desordenada a una limpia y orgánica que refleja la identidad maderera de la marca.</p>
+        <div class="project-pills">
+          <span class="pill">Rebranding</span>
+          <span class="pill">Feed IG</span>
+          <span class="pill">Estrategia</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Lo que ofrezco</p>
+    <h2 class="section-title">Mi Combo <em>Creativo</em></h2>
+  </div>
+  <p style="text-align:center;color:#777;font-size:0.95rem;margin-top:-2rem;max-width:600px;margin-left:auto;margin-right:auto;" class="reveal">Cada proyecto necesita algo distinto: estrategia, diseño, contenido o todo junto. Acá te muestro todo lo que sé hacer para que tu marca brille.</p>
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <div class="service-number">01</div>
+      <h3 class="service-title">Estrategia + Marca</h3>
+      <ul class="service-list">
+        <li>Análisis de marca</li>
+        <li>Branding & Rebranding</li>
+        <li>Armonización estética</li>
+        <li>Optimización de biografía</li>
+        <li>Creación de cuenta publicitaria (Meta Ads)</li>
+        <li>Escritura de copys estratégicos con método AIDA y CTA</li>
+      </ul>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-number">02</div>
+      <h3 class="service-title">Contenido + Redes Sociales</h3>
+      <ul class="service-list">
+        <li>Generación de contenido original con propósito</li>
+        <li>Ideas creativas alineadas a los valores de la marca</li>
+        <li>Guiones para videos con hooks estratégicos</li>
+        <li>Edición de videos y fotografías</li>
+        <li>Creación de flyers, portadas, historias y piezas gráficas</li>
+        <li>Calendario de contenido personalizado</li>
+      </ul>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-number">03</div>
+      <h3 class="service-title">Gestión + Resultados</h3>
+      <ul class="service-list">
+        <li>Publicidad en redes desde Meta Ads</li>
+        <li>Análisis de métricas y optimización</li>
+        <li>Interacción diaria con la comunidad</li>
+        <li>Respuestas personalizadas para generar vínculo</li>
+        <li>Acompañamiento integral para crecer la presencia digital</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- MARQUEE 2 -->
+<div class="marquee-wrap" style="background: var(--pink-deep);">
+  <div class="marquee-track" style="animation-direction: reverse;">
+    <span class="marquee-item" style="color:white;">Gift Cards <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+    <span class="marquee-item" style="color:white;">Flyers Publicitarios <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+    <span class="marquee-item" style="color:white;">Tarjetas de Presentación <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+    <span class="marquee-item" style="color:white;">Invitaciones Personalizadas <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+    <span class="marquee-item" style="color:white;">Diseño Editorial <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+    <span class="marquee-item" style="color:white;">Gift Cards <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+    <span class="marquee-item" style="color:white;">Flyers Publicitarios <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+    <span class="marquee-item" style="color:white;">Tarjetas de Presentación <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+    <span class="marquee-item" style="color:white;">Invitaciones Personalizadas <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+    <span class="marquee-item" style="color:white;">Diseño Editorial <span class="marquee-dot" style="color:rgba(255,255,255,0.5)">✦</span></span>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="contact-left reveal">
+    <h2>¿Trabajamos <em>juntos?</em></h2>
+    <p>Si tu marca necesita orden, estética y una estrategia que funcione de verdad, escribime. Me involucro con cada proyecto como si fuera mío.</p>
+    <div class="contact-links">
+      <a href="mailto:lucia@email.com" class="contact-link">
+        <div class="contact-link-icon">✉️</div>
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-text">lucia.frick12@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/luciafrick" target="_blank" class="contact-link">
+        <div class="contact-link-icon">📸</div>
+        <div>
+          <div class="contact-link-label">Instagram</div>
+          <div class="contact-link-text">@lucia.frick12</div>
+        </div>
+      </a>
+      <a href="https://wa.me/54XXXXXXXXXX" target="_blank" class="contact-link">
+        <div class="contact-link-icon">💬</div>
+        <div>
+          <div class="contact-link-label">WhatsApp</div>
+          <div class="contact-link-text">+54 XXX XXX XXXX</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="contact-form reveal">
+    <div class="form-group">
+      <label>Tu nombre</label>
+      <input type="text" placeholder="María García">
+    </div>
+    <div class="form-group">
+      <label>Email o WhatsApp</label>
+      <input type="text" placeholder="maria@email.com">
+    </div>
+    <div class="form-group">
+      <label>¿En qué te puedo ayudar?</label>
+      <textarea rows="4" placeholder="Contame sobre tu marca y lo que buscás..."></textarea>
+    </div>
+    <button class="form-submit">Enviar mensaje →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Lucía <span>Frick</span></div>
+  <p class="footer-copy">© 2026 Lucía Frick — Social Media Manager & Brand Creator</p>
+  <div class="footer-social">
+    <a href="#" title="Instagram">📸</a>
+    <a href="#" title="WhatsApp">💬</a>
+    <a href="#" title="LinkedIn">💼</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger grid children
+  document.querySelectorAll('.projects-grid .project-card, .services-grid .service-card').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 2) * 120}ms`;
+  });
+</script>
+</body>
+</html>
